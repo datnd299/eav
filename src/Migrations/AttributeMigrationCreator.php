@@ -121,6 +121,7 @@ class AttributeMigrationCreator
             'ISREQUIRED',
             'ISFILTERABLE',
             'ISSEARCHABLE',
+            'ISMULTIPLE',
             'VALIDATIONCLASS'
         ], $data, $attAddStubDefault);
     }
@@ -140,6 +141,7 @@ class AttributeMigrationCreator
             'is_required' => 0,
             'is_filterable' => 0,
             'is_searchable' => 0,
+            'is_multiple' => 0,
             'required_validate_class' =>  null
         ];
     }

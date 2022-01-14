@@ -27,9 +27,10 @@ class CreateAttributesTable extends Migration
             $table->smallInteger('is_filterable')->unsigned()->default(0);
             $table->smallInteger('is_searchable')->unsigned()->default(0);
             $table->smallInteger('is_required')->unsigned()->default(0);
+            $table->smallInteger('is_multiple')->unsigned()->default(0);
             $table->string('required_validate_class')->nullable();
-            
-            
+
+
             $table->unique(['entity_id', 'attribute_code']);
         });
     }

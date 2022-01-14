@@ -13,5 +13,6 @@
 				'is_required' => ISREQUIRED,
 				'is_filterable' => ISFILTERABLE,
 				'is_searchable' => ISSEARCHABLE,
-				'required_validate_class' =>  'VALIDATIONCLASS'	
+				'is_multiple' => 'ISMULTIPLE',
+				'required_validate_class' =>  'VALIDATIONCLASS'
 			]);

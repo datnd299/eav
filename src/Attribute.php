@@ -564,6 +564,28 @@ class Attribute extends Model
      */
     public function updateAttribute($value, $entityId)
     {
+        if ($this->getAttribute('is_multiple') == 1) {
+            if (!is_array($value)) {
+                $value = [$value];
+            }
+            $this->newBaseQueryBuilder()
+                ->from($this->backendTable())->where([
+                    'entity_type_id' => $this->entity()->getKey(),
+                    'attribute_id' => $this->getKey(),
+                    'entity_id' => $entityId
+                ])->delete();
+            foreach ($value as $val) {
+                $attr = [
+                    'entity_type_id' => $this->entity()->getKey(),
+                    'attribute_id' => $this->getKey(),
+                    'entity_id' => $entityId,
+                    'value' => $val
+                ];
+                $this->newBaseQueryBuilder()
+                    ->from($this->backendTable())->insert($attr);
+            }
+            return true;
+        }
         $attributes = [
             'entity_type_id' => $this->entity()->getKey(),
             'attribute_id' => $this->getKey(),

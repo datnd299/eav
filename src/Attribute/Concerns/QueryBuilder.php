@@ -21,21 +21,21 @@ trait QueryBuilder
             'entity_id' => $entityId,
             'value' => $value
         ];
-        
+
         return $this->newBaseQueryBuilder()
             ->from($this->backendTable())
             ->getInsertSql($insertData);
     }
 
     public function addSubQuery($query)
-    {   
-        $subQuery = DB::table($this->backendTable())->select("value")
+    {
+        $subQuery = DB::table($this->backendTable())->selectRaw("GROUP_CONCAT(value SEPARATOR ',')")
             ->where('attribute_id', $this->attributeId())
             ->whereColumn("{$query->from}.{$this->entity()->entityKey()}", "entity_id");
 
         $query->selectSub($subQuery, $this->code());
     }
-    
+
     /**
      * Add a new select column to the query.
      *

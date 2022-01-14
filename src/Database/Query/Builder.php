@@ -252,6 +252,10 @@ class Builder extends QueryBuilder
         }
 
         $loadedAttributes = null;
+
+        if (!in_array('attr.*', $this->columns)) {
+            $this->columns[] = 'attr.*';
+        }
         $columns = $this->columns;
 
         if (is_null($columns)) {
@@ -325,9 +329,7 @@ class Builder extends QueryBuilder
                 return ['columns' => $item];
             }
         });
-
-        $newExpression = $newColumns->get('expression');        
-
+        $newExpression = $newColumns->get('expression');
         // We might have join select clause in the original column
         $columns = $orgColumns
             ->get('columns')
